@@ -41,7 +41,7 @@ def get_llm(provider: str = None, temperature: float = 0.0):
             "api_key": config.OPENAI_API_KEY,
             "temperature": temperature,
         }
-        if config.OPENAI_BASE_URL:
+        if config.OPENAI_BASE_URL and config.OPENAI_BASE_URL.startswith(("http://", "https://")):
             kwargs["base_url"] = config.OPENAI_BASE_URL
         return ChatOpenAI(**kwargs)
 
@@ -111,7 +111,7 @@ def get_embeddings(provider: str = None):
             "model": config.OPENAI_EMBEDDING_MODEL,
             "api_key": config.OPENAI_API_KEY,
         }
-        if config.OPENAI_BASE_URL:
+        if config.OPENAI_BASE_URL and config.OPENAI_BASE_URL.startswith(("http://", "https://")):
             kwargs["base_url"] = config.OPENAI_BASE_URL
         return OpenAIEmbeddings(**kwargs)
 

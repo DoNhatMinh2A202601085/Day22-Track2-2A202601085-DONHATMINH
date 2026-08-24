@@ -14,7 +14,7 @@ build/
 
 # Virtual environments
 venv/
-env/
+.env/
 .venv/
 
 # IDE
@@ -28,3 +28,4 @@ env/
 
 # Lab outputs (không commit, chỉ nộp evidence/)
 data/ragas_report.json
+.agent/ 

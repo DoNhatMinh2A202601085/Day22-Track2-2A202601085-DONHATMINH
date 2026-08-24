@@ -4,9 +4,15 @@ Tải cấu hình từ file .env và thiết lập biến môi trường LangSmi
 ⚠️  Import module này TRƯỚC KHI import bất kỳ thư viện LangChain nào.
     config.py tự động set LANGCHAIN_* vào os.environ khi được import.
 """
+import sys
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 
 # Tải .env từ thư mục gốc của project (Lab/)
 _root = Path(__file__).parent.parent
@@ -24,7 +30,14 @@ PROVIDER = os.getenv("PROVIDER", "openai").lower()
 
 # ── OpenAI ────────────────────────────────────────────────────────────────
 OPENAI_API_KEY         = os.getenv("OPENAI_API_KEY", "")
-OPENAI_BASE_URL        = os.getenv("OPENAI_BASE_URL", "")   # để trống nếu dùng OpenAI chính thức
+_base_url              = os.getenv("OPENAI_BASE_URL", "").strip()
+if _base_url and _base_url.startswith(("http://", "https://")):
+    OPENAI_BASE_URL = _base_url
+    os.environ["OPENAI_BASE_URL"] = _base_url
+else:
+    OPENAI_BASE_URL = ""
+    os.environ.pop("OPENAI_BASE_URL", None)
+
 OPENAI_MODEL           = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
 
