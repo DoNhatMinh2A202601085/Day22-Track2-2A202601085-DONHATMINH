@@ -4,6 +4,7 @@
 **Mã bài lab:** Day 22 - Track 2  
 **Chủ đề:** LangSmith Tracing, Prompt Versioning & A/B Routing, RAGAS Quantitative Evaluation, Guardrails AI Output Validation
 
+URL Langsmith:https://smith.langchain.com/o/f80ae721-463b-4ae7-9f1f-59db3669ea9d/projects?timeModel=%7B%22duration%22%3A%221d%22%7D
 ---
 
 ## 1. Tổng quan Dự án & Cấu trúc Pipeline
